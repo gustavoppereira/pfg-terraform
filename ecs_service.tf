@@ -11,11 +11,21 @@ resource "aws_ecs_service" "gus_app" {
   #   field = "cpu"
   # }
   #
-  # load_balancer {
-  #   target_group_arn = aws_lb_target_group.app.arn
-  #   container_name   = "web"
-  #   container_port   = 80
-  # }
+
+  deployment_controller {
+    type = "ECS"
+  }
+
+  capacity_provider_strategy {
+    base              = 0
+    capacity_provider = aws_ecs_capacity_provider.gus_app.name
+    weight            = 1
+  }
+  load_balancer {
+    target_group_arn = aws_lb_target_group.app.arn
+    container_name   = "web"
+    container_port   = 80
+  }
 
   network_configuration {
     subnets = ["subnet-58ffbf56", "subnet-db8612fa"]

@@ -15,6 +15,13 @@ resource "aws_autoscaling_group" "app" {
   vpc_zone_identifier  = ["subnet-58ffbf56", "subnet-db8612fa"]
   launch_configuration = aws_launch_configuration.app.name
 
+  lifecycle {
+    ignore_changes = [
+      desired_capacity,
+      min_size,
+      max_size
+    ]
+  }
   desired_capacity          = 0
   min_size                  = 0
   max_size                  = 5
