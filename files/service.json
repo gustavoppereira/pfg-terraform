@@ -2,12 +2,16 @@
     {
     "name": "web",
     "image": "gustavoppereira/pfg-cloud:latest",
-
-    "memory": 256,
+    "cpu": 1000,
+    "memory": 512,
     "portMappings": [
       {
         "containerPort": 5000,
         "hostPort": 5000
+      },
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
       }
     ],
     "environment": [

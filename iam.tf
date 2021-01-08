@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "app_role" {
     principals {
       type = "Service"
       identifiers = [
-        "ec2.amazonaws.com"
+        "ec2.amazonaws.com",
         "ecs-tasks.amazonaws.com"
       ]
     }
@@ -16,12 +16,12 @@ data "aws_iam_policy_document" "app_role" {
 }
 
 resource "aws_iam_instance_profile" "app" {
-  name = "app"
+  name = "gus"
   role = aws_iam_role.app.name
 }
 
 resource "aws_iam_role" "app" {
-  name = "app"
+  name = "gus"
   path = "/"
 
   assume_role_policy = data.aws_iam_policy_document.app_role.json

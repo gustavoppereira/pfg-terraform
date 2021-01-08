@@ -1,9 +1,9 @@
   [
     {
     "name": "prometheus",
-    "image": "gustavoppereira/prometheus:latest",
-
-    "memory": 256,
+    "image": "ragazzid/gus:1",
+    "cpu": 1000,
+    "memory": 512,
     "portMappings": [
       {
         "containerPort": 9090,

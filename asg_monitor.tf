@@ -4,7 +4,7 @@ resource "aws_launch_configuration" "monitor" {
   name                 = "monitor-template"
   image_id             = data.aws_ami.ecs.id
   iam_instance_profile = aws_iam_instance_profile.app.name
-  security_groups      = [var.security_group_id]
+  security_groups      = [module.vpc.default_security_group_id]
   user_data            = "#!/bin/bash\necho ECS_CLUSTER=monitor-cluster >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
 }
@@ -14,7 +14,7 @@ resource "aws_autoscaling_group" "monitor" {
 
   protect_from_scale_in = "true" # Necessario
 
-  vpc_zone_identifier  = var.subnets
+  vpc_zone_identifier  = module.vpc.public_subnets
   launch_configuration = aws_launch_configuration.monitor.name
 
   lifecycle {
@@ -33,6 +33,12 @@ resource "aws_autoscaling_group" "monitor" {
   tag {
     key                 = "AmazonECSManaged"
     value               = ""
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Name"
+    value               = "Monitor"
     propagate_at_launch = true
   }
 }

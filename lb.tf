@@ -1,9 +1,9 @@
 resource "aws_lb" "gus" {
-  name               = "gus"
+  name               = "gustavo"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [var.security_group_id]
-  subnets            = var.subnets
+  security_groups    = [module.vpc.default_security_group_id]
+  subnets            = module.vpc.public_subnets
 
   enable_deletion_protection = true
 
@@ -13,18 +13,18 @@ resource "aws_lb" "gus" {
 }
 
 resource "aws_lb_target_group" "app" {
-  name        = "gus-app-lb-tg-app"
+  name        = "gustavo-app-lb-tg-app"
   port        = 80
   protocol    = "HTTP"
-  vpc_id      = var.vpc_id
+  vpc_id      = module.vpc.vpc_id
   target_type = "ip"
 }
 
 resource "aws_lb_target_group" "monitor" {
-  name        = "gus-app-lb-tg-monitor"
+  name        = "gustavo-app-lb-tg-monitor"
   port        = 9090
   protocol    = "HTTP"
-  vpc_id      = var.vpc_id
+  vpc_id      = module.vpc.vpc_id
   target_type = "ip"
 }
 

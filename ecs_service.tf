@@ -21,7 +21,7 @@ resource "aws_ecs_service" "gus_app" {
   }
 
   network_configuration {
-    subnets = var.subnets
+    subnets = module.vpc.public_subnets
   }
 }
 
@@ -37,7 +37,7 @@ resource "aws_ecs_service" "monitor" {
 
   capacity_provider_strategy {
     base              = 0
-    capacity_provider = aws_ecs_capacity_provider.gus_app.name
+    capacity_provider = aws_ecs_capacity_provider.monitor.name
     weight            = 1
   }
   load_balancer {
@@ -47,6 +47,6 @@ resource "aws_ecs_service" "monitor" {
   }
 
   network_configuration {
-    subnets = var.subnets
+    subnets = module.vpc.public_subnets
   }
 }
