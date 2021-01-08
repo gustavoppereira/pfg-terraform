@@ -17,11 +17,11 @@ resource "aws_ecs_service" "ragazzid_app" {
   load_balancer {
     target_group_arn = aws_lb_target_group.app.arn
     container_name   = "web"
-    container_port   = 5000
+    container_port   = 80
   }
 
   network_configuration {
-    subnets         = module.vpc.private_subnets
+    subnets         = module.vpc.public_subnets
     security_groups = [module.vpc.default_security_group_id]
   }
 }
