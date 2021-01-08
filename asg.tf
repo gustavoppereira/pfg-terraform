@@ -1,8 +1,8 @@
 resource "aws_launch_configuration" "app" {
   name                 = "gus_app"
-  image_id             = "ami-0f06fc190dd71269e"
+  image_id             = var.ami_id
   iam_instance_profile = aws_iam_instance_profile.app.name
-  security_groups      = ["sg-d3ffe1e5"]
+  security_groups      = [var.security_group_id]
   user_data            = "#!/bin/bash\necho ECS_CLUSTER=gus_app >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
 }
