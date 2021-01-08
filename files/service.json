@@ -1,17 +1,27 @@
-  [
-    {
+  [{
     "name": "web",
     "image": "gustavoppereira/pfg-cloud:latest",
 
-    "memory": 256,
-    "portMappings": [
-      {
+    "memory": 512,
+    "portMappings": [{
         "containerPort": 5000,
         "hostPort": 5000
+      },
+      {
+        "containerPort": 8080,
+        "hostPort": 8080
       }
     ],
-    "environment": [
-      {"name": "DB_HOST", "value": "pfg-db.czpqvvygcatw.us-east-1.rds.amazonaws.com"}
-    ]
-  }
-]
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/service",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "app"
+      }
+    },
+    "environment": [{
+      "name": "DB_HOST",
+      "value": "pfg-db.czpqvvygcatw.us-east-1.rds.amazonaws.com"
+    }]
+  }]

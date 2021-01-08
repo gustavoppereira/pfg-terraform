@@ -1,5 +1,5 @@
-resource "aws_ecs_task_definition" "gus_app" {
-  family                = "service"
+resource "aws_ecs_task_definition" "app" {
+  family                = "app-task"
   container_definitions = file("files/service.json")
   network_mode          = "awsvpc"
 
@@ -12,7 +12,7 @@ resource "aws_ecs_task_definition" "gus_app" {
 }
 
 resource "aws_ecs_task_definition" "monitor" {
-  family                = "service"
+  family                = "monitor-task"
   container_definitions = file("files/monitor.json")
   network_mode          = "awsvpc"
 

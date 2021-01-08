@@ -1,14 +1,18 @@
-  [
-    {
+  [{
     "name": "prometheus",
-    "image": "gustavoppereira/prometheus:latest",
+    "image": "prom/prometheus:latest",
 
-    "memory": 256,
-    "portMappings": [
-      {
-        "containerPort": 9090,
-        "hostPort": 9090
+    "memory": 512,
+    "portMappings": [{
+      "containerPort": 9090,
+      "hostPort": 9090
+    }],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/monitor",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "prometheus"
       }
-    ]
-  }
-]
+    }
+  }]

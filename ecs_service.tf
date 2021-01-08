@@ -1,8 +1,8 @@
 
-resource "aws_ecs_service" "gus_app" {
-  name            = "web"
-  cluster         = aws_ecs_cluster.gus_app.id
-  task_definition = aws_ecs_task_definition.gus_app.arn
+resource "aws_ecs_service" "app" {
+  name            = "app-service"
+  cluster         = aws_ecs_cluster.app.id
+  task_definition = aws_ecs_task_definition.app.arn
   desired_count   = 1
 
   deployment_controller {
@@ -11,7 +11,7 @@ resource "aws_ecs_service" "gus_app" {
 
   capacity_provider_strategy {
     base              = 0
-    capacity_provider = aws_ecs_capacity_provider.gus_app.name
+    capacity_provider = aws_ecs_capacity_provider.app.name
     weight            = 1
   }
   load_balancer {
@@ -37,7 +37,7 @@ resource "aws_ecs_service" "monitor" {
 
   capacity_provider_strategy {
     base              = 0
-    capacity_provider = aws_ecs_capacity_provider.gus_app.name
+    capacity_provider = aws_ecs_capacity_provider.monitor.name
     weight            = 1
   }
   load_balancer {

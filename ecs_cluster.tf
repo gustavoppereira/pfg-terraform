@@ -1,14 +1,14 @@
-resource "aws_ecs_cluster" "gus_app" {
-  name = "gus_app"
+resource "aws_ecs_cluster" "app" {
+  name = "app-cluster"
   tags = {
     ManagedBy = "Terraform"
     Type      = "http"
   }
 
-  capacity_providers = [aws_ecs_capacity_provider.gus_app.name]
+  capacity_providers = [aws_ecs_capacity_provider.app.name]
 
   default_capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.gus_app.name
+    capacity_provider = aws_ecs_capacity_provider.app.name
     weight            = 1
   }
 }

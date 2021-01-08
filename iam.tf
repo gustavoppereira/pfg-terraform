@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "app_role" {
     principals {
       type = "Service"
       identifiers = [
-        "ec2.amazonaws.com"
+        "ec2.amazonaws.com",
         "ecs-tasks.amazonaws.com"
       ]
     }

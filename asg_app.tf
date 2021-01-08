@@ -1,14 +1,16 @@
 resource "aws_launch_configuration" "app" {
-  name                 = "gus_app"
+  name                 = "app-configuration"
   image_id             = data.aws_ami.ecs.id
   iam_instance_profile = aws_iam_instance_profile.app.name
   security_groups      = [var.security_group_id]
-  user_data            = "#!/bin/bash\necho ECS_CLUSTER=gus_app >> /etc/ecs/ecs.config"
+  user_data            = "#!/bin/bash\necho ECS_CLUSTER=app-cluster >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
+
+  #depends_on = [aws_ecs_cluster.app]
 }
 
 resource "aws_autoscaling_group" "app" {
-  name = "gus_app"
+  name = "app-scalling-group"
 
   protect_from_scale_in = "true" # Necessario
 
@@ -39,10 +41,16 @@ resource "aws_autoscaling_group" "app" {
     value               = "MeuLindo"
     propagate_at_launch = true
   }
+
+  tag {
+    key                 = "Name"
+    value               = "App"
+    propagate_at_launch = true
+  }
 }
 
-resource "aws_ecs_capacity_provider" "gus_app" {
-  name = "gus_app"
+resource "aws_ecs_capacity_provider" "app" {
+  name = "app-cp"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.app.arn
