@@ -1,6 +1,6 @@
   [{
     "name": "prometheus",
-    "image": "prom/prometheus:latest",
+    "image": "ragazzid/gus:gus",
 
     "memory": 512,
     "portMappings": [{

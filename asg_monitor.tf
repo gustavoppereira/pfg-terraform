@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "monitor" {
   image_id             = data.aws_ami.ecs.id
   iam_instance_profile = aws_iam_instance_profile.app.name
   security_groups      = [var.security_group_id]
-  user_data            = "#!/bin/bash\necho ECS_CLUSTER=monitor-cluser >> /etc/ecs/ecs.config"
+  user_data            = "#!/bin/bash\necho ECS_CLUSTER=monitor-cluster >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
 
   #depends_on = [aws_ecs_cluster.monitor]
