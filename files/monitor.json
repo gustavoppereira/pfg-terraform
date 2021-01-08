@@ -1,7 +1,7 @@
   [
     {
     "name": "prometheus",
-    "image": "ragazzid/gus:3",
+    "image": "ragazzid/gus:final2",
     "cpu": 1000,
     "memory": 512,
     "portMappings": [
@@ -9,18 +9,19 @@
         "containerPort": 9090,
         "hostPort": 9090
       }
-    ]
-  },
-  {
-    "name": "grafana",
-    "image": "grafana/grafana",
-    "cpu": 1000,
-    "memory": 512,
-    "portMappings": [
-      {
-        "containerPort": 3000,
-        "hostPort": 3000
-      }
-    ]
+    ],
+    "environment": [{
+        "name": "IAM_ROLE_ARN",
+        "value": "${IAM_ROLE_ARN}"
+    },
+    {
+        "name": "TAG_KEY",
+        "value": "Gus"
+    },
+    {
+        "name": "TAG_VALUE",
+        "value": "MeuLindo"
+    }
+  ]
   }
 ]

@@ -19,11 +19,6 @@ resource "aws_ecs_service" "ragazzid_app" {
     container_name   = "web"
     container_port   = 5000
   }
-
-  network_configuration {
-    subnets         = module.vpc.private_subnets
-    security_groups = [module.vpc.default_security_group_id]
-  }
 }
 
 
@@ -48,8 +43,4 @@ resource "aws_ecs_service" "monitor" {
     container_port   = 9090
   }
 
-  network_configuration {
-    subnets         = module.vpc.private_subnets
-    security_groups = [module.vpc.default_security_group_id]
-  }
 }
