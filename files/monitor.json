@@ -1,13 +1,25 @@
   [
     {
     "name": "prometheus",
-    "image": "ragazzid/gus:1",
+    "image": "ragazzid/gus:3",
     "cpu": 1000,
     "memory": 512,
     "portMappings": [
       {
         "containerPort": 9090,
         "hostPort": 9090
+      }
+    ]
+  },
+  {
+    "name": "grafana",
+    "image": "grafana/grafana",
+    "cpu": 1000,
+    "memory": 512,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
       }
     ]
   }
