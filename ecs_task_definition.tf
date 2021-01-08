@@ -16,6 +16,8 @@ resource "aws_ecs_task_definition" "monitor" {
   container_definitions = file("files/monitor.json")
   network_mode          = "awsvpc"
 
+  task_role_arn = aws_iam_role.app.arn
+
   requires_compatibilities = ["EC2"]
 
   tags = {

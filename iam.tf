@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "app_role" {
       type = "Service"
       identifiers = [
         "ec2.amazonaws.com"
+        "ecs-tasks.amazonaws.com"
       ]
     }
     actions = [
