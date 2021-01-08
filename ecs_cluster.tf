@@ -13,18 +13,18 @@ resource "aws_ecs_cluster" "ragazzid_app" {
   }
 }
 
-resource "aws_ecs_cluster" "monitor" {
-  name = "${var.name_prefix}_monitor"
-  tags = {
-    ManagedBy = "Terraform"
-    Type      = "http"
-  }
-
-
-  capacity_providers = [aws_ecs_capacity_provider.monitor.name]
-
-  default_capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.monitor.name
-    weight            = 1
-  }
-}
+# resource "aws_ecs_cluster" "monitor" {
+#   name = "${var.name_prefix}_monitor"
+#   tags = {
+#     ManagedBy = "Terraform"
+#     Type      = "http"
+#   }
+#
+#
+#   capacity_providers = [aws_ecs_capacity_provider.monitor.name]
+#
+#   default_capacity_provider_strategy {
+#     capacity_provider = aws_ecs_capacity_provider.monitor.name
+#     weight            = 1
+#   }
+# }
