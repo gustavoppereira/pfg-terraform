@@ -9,7 +9,3 @@ variable "subnets" {
 variable "security_group_id" {
   default = "sg-6b666d5d"
 }
-
-variable "ami_id" {
-  default = "ami-0f06fc190dd71269e"
-}
