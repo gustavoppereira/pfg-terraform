@@ -1,16 +1,16 @@
 
 
 resource "aws_launch_configuration" "monitor" {
-  name                 = "monitor-template"
+  name                 = "${var.name_prefix}_monitor"
   image_id             = data.aws_ami.ecs.id
   iam_instance_profile = aws_iam_instance_profile.app.name
   security_groups      = [module.vpc.default_security_group_id]
-  user_data            = "#!/bin/bash\necho ECS_CLUSTER=monitor-cluster >> /etc/ecs/ecs.config"
+  user_data            = "#!/bin/bash\necho ECS_CLUSTER=${var.name_prefix}_monitor >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
 }
 
 resource "aws_autoscaling_group" "monitor" {
-  name = "monitor-as"
+  name = "monitor"
 
   protect_from_scale_in = "true" # Necessario
 

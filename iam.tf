@@ -16,12 +16,12 @@ data "aws_iam_policy_document" "app_role" {
 }
 
 resource "aws_iam_instance_profile" "app" {
-  name = "gus"
+  name = "${var.name_prefix}_app"
   role = aws_iam_role.app.name
 }
 
 resource "aws_iam_role" "app" {
-  name = "gus"
+  name = "${var.name_prefix}_app"
   path = "/"
 
   assume_role_policy = data.aws_iam_policy_document.app_role.json

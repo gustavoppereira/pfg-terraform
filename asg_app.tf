@@ -1,14 +1,14 @@
 resource "aws_launch_configuration" "app" {
-  name                 = "gus_app"
+  name                 = "${var.name_prefix}_app"
   image_id             = data.aws_ami.ecs.id
   iam_instance_profile = aws_iam_instance_profile.app.name
   security_groups      = [module.vpc.default_security_group_id]
-  user_data            = "#!/bin/bash\necho ECS_CLUSTER=gus_app >> /etc/ecs/ecs.config"
+  user_data            = "#!/bin/bash\necho ECS_CLUSTER=${var.name_prefix}_web >> /etc/ecs/ecs.config"
   instance_type        = "t3.micro"
 }
 
 resource "aws_autoscaling_group" "app" {
-  name = "gus_app"
+  name = "${var.name_prefix}_app"
 
   protect_from_scale_in = "true" # Necessario
 
@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "app" {
   }
 
   tag {
-    key                 = "Gus"
+    key                 = var.name_prefix
     value               = "MeuLindo"
     propagate_at_launch = true
   }
@@ -47,8 +47,8 @@ resource "aws_autoscaling_group" "app" {
   }
 }
 
-resource "aws_ecs_capacity_provider" "gus_app" {
-  name = "gus_app"
+resource "aws_ecs_capacity_provider" "ragazzid_app" {
+  name = "${var.name_prefix}_app"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.app.arn
