@@ -1,0 +1,14 @@
+  [
+    {
+    "name": "prometheus",
+    "image": "gustavoppereira/prometheus:latest",
+
+    "memory": 256,
+    "portMappings": [
+      {
+        "containerPort": 9090,
+        "hostPort": 9090
+      }
+    ]
+  }
+]

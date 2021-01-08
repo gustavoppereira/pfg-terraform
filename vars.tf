@@ -1,13 +1,13 @@
 variable "vpc_id" {
-  default = "vpc-be3ae0c3"
+  default = "vpc-8fcd68f2"
 }
 
 variable "subnets" {
-  default = ["subnet-58ffbf56", "subnet-db8612fa"]
+  default = ["subnet-4169b470", "subnet-c0971ea6"]
 }
 
 variable "security_group_id" {
-  default = "sg-d3ffe1e5"
+  default = "sg-6b666d5d"
 }
 
 variable "ami_id" {

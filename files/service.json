@@ -1,14 +1,17 @@
   [
     {
     "name": "web",
-    "image": "nginx",
-    
+    "image": "gustavoppereira/pfg-cloud:latest",
+
     "memory": 256,
     "portMappings": [
       {
-        "containerPort": 80,
-        "hostPort": 80
+        "containerPort": 5000,
+        "hostPort": 5000
       }
+    ],
+    "environment": [
+      {"name": "DB_HOST", "value": "pfg-db.czpqvvygcatw.us-east-1.rds.amazonaws.com"}
     ]
   }
 ]
