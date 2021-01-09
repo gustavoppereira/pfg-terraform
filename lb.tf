@@ -44,7 +44,7 @@ resource "aws_lb_listener" "app" {
 
 resource "aws_lb_target_group" "prometheus" {
   name     = "${var.name_prefix}-lb-tg-prometheus"
-  port     = 9090
+  port     = 81
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
   # target_type = "ip"

@@ -22,7 +22,7 @@ resource "aws_autoscaling_group" "app" {
       max_size
     ]
   }
-  desired_capacity          = 0
+  desired_capacity          = 1
   min_size                  = 0
   max_size                  = 1
   health_check_grace_period = 300

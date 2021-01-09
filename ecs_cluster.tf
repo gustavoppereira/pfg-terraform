@@ -21,10 +21,10 @@ resource "aws_ecs_cluster" "monitor" {
   }
 
 
-  capacity_providers = [aws_ecs_capacity_provider.monitor.name]
+  capacity_providers = [aws_ecs_capacity_provider.monitor.name, aws_ecs_capacity_provider.grafana.name]
 
-  default_capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.monitor.name
-    weight            = 1
-  }
+//  default_capacity_provider_strategy {
+//    capacity_provider = aws_ecs_capacity_provider.monitor.name
+//    weight            = 1
+//  }
 }

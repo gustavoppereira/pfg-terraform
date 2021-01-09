@@ -5,16 +5,18 @@ resource "aws_db_subnet_group" "default" {
 }
 
 resource "aws_db_instance" "app" {
-  allocated_storage   = 20
-  identifier          = "app-db"
-  port                = 3306
+  allocated_storage     = 20
+  identifier            = "app-db"
+  port                  = 3306
 
-  engine              = "mariadb"
-  engine_version      = "10.4.8"
-  instance_class      = "db.t2.micro"
+  engine                = "mariadb"
+  engine_version        = "10.4.8"
+  instance_class        = "db.t2.micro"
 
-  username            = "admin"
-  password            = "password"
+  username              = "admin"
+  password              = "password"
+
+  skip_final_snapshot   = true
 
   db_subnet_group_name  = aws_db_subnet_group.default.id
 

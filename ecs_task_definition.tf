@@ -43,3 +43,41 @@ resource "aws_ecs_task_definition" "monitor" {
     Type      = "http"
   }
 }
+
+resource "aws_ecs_task_definition" "grafana" {
+  family                = "${var.name_prefix}_grafana"
+  container_definitions = <<-DEFINITION
+  [
+    {
+    "name": "grafana",
+    "image": "grafana/grafana:6.5.0",
+    "cpu": 1000,
+    "memory": 512,
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "/ecs/monitor",
+        "awslogs-region": "us-east-1",
+        "awslogs-stream-prefix": "grafana"
+      }
+    }
+  }]
+  DEFINITION
+
+  network_mode          = "host"
+
+  #task_role_arn = aws_iam_role.app.arn
+
+  requires_compatibilities = ["EC2"]
+
+  tags = {
+    ManagedBy = "Terraform"
+    Type      = "http"
+  }
+}
