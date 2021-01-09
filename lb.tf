@@ -42,8 +42,8 @@ resource "aws_lb_listener" "app" {
   }
 }
 
-resource "aws_lb_target_group" "monitor" {
-  name     = "${var.name_prefix}-lb-tg-monitor"
+resource "aws_lb_target_group" "prometheus" {
+  name     = "${var.name_prefix}-lb-tg-prometheus"
   port     = 9090
   protocol = "HTTP"
   vpc_id   = module.vpc.vpc_id
@@ -55,15 +55,49 @@ resource "aws_lb_target_group" "monitor" {
     port     = 9090
     matcher  = "200-299"
   }
+
+  depends_on = [
+    aws_lb.this
+  ]
 }
 
-resource "aws_lb_listener" "monitor" {
+resource "aws_lb_listener" "prometheus" {
   load_balancer_arn = aws_lb.this.arn
   port              = "81"
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.monitor.arn
+    target_group_arn = aws_lb_target_group.prometheus.arn
+  }
+}
+
+resource "aws_lb_target_group" "grafana" {
+  name     = "${var.name_prefix}-lb-tg-grafana"
+  port     = 3000
+  protocol = "HTTP"
+  vpc_id   = module.vpc.vpc_id
+  # target_type = "ip"
+
+  health_check {
+    interval = 30
+    path     = "/api/health"
+    port     = 3000
+    matcher  = "200-299"
+  }
+
+  depends_on = [
+    aws_lb.this
+  ]
+}
+
+resource "aws_lb_listener" "grafana" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = "3000"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.grafana.arn
   }
 }

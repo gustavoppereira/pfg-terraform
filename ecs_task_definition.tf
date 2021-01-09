@@ -1,4 +1,4 @@
-resource "aws_ecs_task_definition" "ragazzid_app" {
+resource "aws_ecs_task_definition" "app" {
   family                = "${var.name_prefix}_web"
   container_definitions = file("files/service.json")
   network_mode          = "host"
@@ -15,9 +15,12 @@ resource "aws_ecs_task_definition" "ragazzid_app" {
 data "template_file" "monitor" {
   template = file("files/monitor.json")
   vars = {
-    IAM_ROLE_ARN = aws_iam_role.app.arn
+    IAM_ROLE_ARN  = aws_iam_role.app.arn
+    TAG_KEY       = var.tag_key
+    TAG_VALUE     = var.tag_value
   }
 }
+
 resource "aws_ecs_task_definition" "monitor" {
   family                = "${var.name_prefix}_monitor"
   container_definitions = data.template_file.monitor.rendered

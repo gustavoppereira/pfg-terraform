@@ -13,3 +13,11 @@
 variable "name_prefix" {
   default = "cluster"
 }
+
+variable "tag_key" {
+  default = "INSTANCE"
+}
+
+variable "tag_value" {
+  default = "app"
+}

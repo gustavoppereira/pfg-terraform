@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "ragazzid"
+  name = "pfg"
   cidr = "10.0.0.0/16"
 
   azs             = ["us-east-1a", "us-east-1b"]
@@ -15,4 +15,13 @@ module "vpc" {
     ManagedBy   = "Terraform"
     Environment = "Prod"
   }
+}
+
+resource "aws_security_group_rule" "allow_all" {
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 0
+  to_port           = 9999
+  protocol          = "tcp"
+  security_group_id = module.vpc.default_security_group_id
 }

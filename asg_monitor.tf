@@ -1,5 +1,4 @@
 
-
 resource "aws_launch_configuration" "monitor" {
   name                 = "${var.name_prefix}_monitor"
   image_id             = data.aws_ami.ecs.id
@@ -45,7 +44,7 @@ resource "aws_autoscaling_group" "monitor" {
 
 
 resource "aws_ecs_capacity_provider" "monitor" {
-  name = "monitor-cp"
+  name = "${var.name_prefix}_monitor"
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = aws_autoscaling_group.monitor.arn

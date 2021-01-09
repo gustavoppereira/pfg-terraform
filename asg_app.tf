@@ -35,8 +35,8 @@ resource "aws_autoscaling_group" "app" {
   }
 
   tag {
-    key                 = var.name_prefix
-    value               = "MeuLindo"
+    key                 = var.tag_key
+    value               = var.tag_value
     propagate_at_launch = true
   }
 
@@ -47,7 +47,7 @@ resource "aws_autoscaling_group" "app" {
   }
 }
 
-resource "aws_ecs_capacity_provider" "ragazzid_app" {
+resource "aws_ecs_capacity_provider" "app" {
   name = "${var.name_prefix}_app"
 
   auto_scaling_group_provider {

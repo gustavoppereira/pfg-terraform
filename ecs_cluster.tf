@@ -1,14 +1,14 @@
-resource "aws_ecs_cluster" "ragazzid_app" {
+resource "aws_ecs_cluster" "app" {
   name = "${var.name_prefix}_web"
   tags = {
     ManagedBy = "Terraform"
     Type      = "http"
   }
 
-  capacity_providers = [aws_ecs_capacity_provider.ragazzid_app.name]
+  capacity_providers = [aws_ecs_capacity_provider.app.name]
 
   default_capacity_provider_strategy {
-    capacity_provider = aws_ecs_capacity_provider.ragazzid_app.name
+    capacity_provider = aws_ecs_capacity_provider.app.name
     weight            = 1
   }
 }
