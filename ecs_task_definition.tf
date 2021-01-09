@@ -1,6 +1,14 @@
+data "template_file" "app" {
+  template = file("files/service.json")
+  vars = {
+    DB_HOST       = aws_db_instance.app.endpoint
+    TEST_GROUP_ID = uuid()
+  }
+}
+
 resource "aws_ecs_task_definition" "app" {
   family                = "${var.name_prefix}_web"
-  container_definitions = file("files/service.json")
+  container_definitions = data.template_file.app.rendered
   network_mode          = "host"
 
   requires_compatibilities = ["EC2"]

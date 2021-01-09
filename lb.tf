@@ -93,7 +93,7 @@ resource "aws_lb_target_group" "grafana" {
 
 resource "aws_lb_listener" "grafana" {
   load_balancer_arn = aws_lb.this.arn
-  port              = "3000"
+  port              = "82"
   protocol          = "HTTP"
 
   default_action {
@@ -101,3 +101,34 @@ resource "aws_lb_listener" "grafana" {
     target_group_arn = aws_lb_target_group.grafana.arn
   }
 }
+
+//resource "aws_lb_listener_rule" "prometheus" {
+//  listener_arn = aws_lb_listener.prometheus.arn
+//
+//  action {
+//    type = "forward"
+//    target_group_arn = aws_lb_target_group.prometheus.arn
+//  }
+//
+//  condition {
+//    path_pattern {
+//      values = ["/prometheus/*"]
+//    }
+//  }
+//}
+//
+//resource "aws_lb_listener_rule" "grafana" {
+//  listener_arn = aws_lb_listener.prometheus.arn
+//
+//  action {
+//    type = "forward"
+//    target_group_arn = aws_lb_target_group.grafana.arn
+//  }
+//
+//  condition {
+//    path_pattern {
+//      values = ["/grafana/*"]
+//    }
+//  }
+//}
+

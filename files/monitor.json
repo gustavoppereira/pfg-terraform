@@ -1,12 +1,15 @@
-  [{
+[
+  {
     "name": "prometheus",
     "image": "ragazzid/gus:final3",
     "cpu": 1000,
     "memory": 512,
-    "portMappings": [{
-      "containerPort": 9090,
-      "hostPort": 9090
-    }],
+    "portMappings": [
+      {
+        "containerPort": 9090,
+        "hostPort": 9090
+      }
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -15,7 +18,8 @@
         "awslogs-stream-prefix": "prometheus"
       }
     },
-    "environment": [{
+    "environment": [
+      {
         "name": "IAM_ROLE_ARN",
         "value": "${IAM_ROLE_ARN}"
       },
@@ -34,10 +38,12 @@
     "image": "grafana/grafana:latest",
     "cpu": 1000,
     "memory": 512,
-    "portMappings": [{
-      "containerPort": 3000,
-      "hostPort": 3000
-    }],
+    "portMappings": [
+      {
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -46,4 +52,5 @@
         "awslogs-stream-prefix": "grafana"
       }
     }
-  }]
+  }
+]

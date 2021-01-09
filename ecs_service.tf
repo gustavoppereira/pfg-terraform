@@ -1,4 +1,3 @@
-
 resource "aws_ecs_service" "app" {
   name            = "${var.name_prefix}_web"
   cluster         = aws_ecs_cluster.app.id
@@ -19,6 +18,8 @@ resource "aws_ecs_service" "app" {
     container_name   = "web"
     container_port   = 5000
   }
+
+  depends_on = [aws_db_instance.app,]
 }
 
 

@@ -17,6 +17,14 @@
     },
     "environment": [{
       "name": "DB_HOST",
-      "value": "pfg-db.czpqvvygcatw.us-east-1.rds.amazonaws.com"
+      "value": "${DB_HOST}"
+    },
+    {
+      "name": "PROVIDER",
+      "value": "aws"
+    },
+    {
+      "name": "TEST_GROUP_ID",
+      "value": "${TEST_GROUP_ID}"
     }]
   }]
